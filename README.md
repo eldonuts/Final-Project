@@ -37,7 +37,7 @@ To get logins working you will need to sign up for OAUTH keys for Facebook and G
 * [Facebook Developers Page](https://developers.facebook.com/) (we are using version 2.5)
 * [Google Developers Page](https://console.developers.google.com/) (implementation type [here](https://developers.google.com/identity/sign-in/web/server-side-flow))
 
-Once you've gone through the instructions and gotten the keys, you need to download them in JSON format and save them to the secrets folder (by default set to /secrets), and call them facebook_client_secrets.json and google_client_secrets respectively.
+Once you've gone through the instructions and gotten the keys, you need to download them in JSON format and save them to the secrets folder (by default set to /secrets), and call them facebook_client_secrets.json and google_client_secrets.json respectively.
 
 #### Credit
 
