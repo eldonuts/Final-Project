@@ -22,13 +22,22 @@ This is a simple catalogue app created using Flask, and was created as part of t
 3. Create a **settings.cfg** file in your /restuarants directory and add a secret key like so (where xxxx is a randomly generated sequence of numbers): ```SECRET_KEY = 'xxxx'```
 4. Run: ```python setup.py```
 5. To start the app you just need to run: ```python run.py```
-6. That's it, you're good to go, if you want some test data please look below.
+6. That's it, you're good to go (without auth), if you want some test data please look below.
 
 #### Test Data
 
 If you wish you generate some test data, I have added a script to grab the top 20 restuarants for NYC (from Zomato) and populate them with a bunch of random menu items. If you wish to try this out, just sign up for a Zomato API key [here](https://developers.zomato.com) and add this line to your **settings.cfg** file (where xxxx is your new key): ```ZOMATO_API_KEY = 'xxxx'```.
 
 Once you're ready you can simply run: ```python test_db_populate.py```
+
+#### OAUTH Setup
+
+To get logins working you will need to sign up for OAUTH keys for Facebook and Google, or alter the app to remove/add others at your discretion.
+
+* [Facebook Developers Page](https://developers.facebook.com/) (we are using version 2.5)
+* [Google Developers Page](https://console.developers.google.com/) (implementation type [here](https://developers.google.com/identity/sign-in/web/server-side-flow))
+
+Once you've gone through the instructions and gotten the keys, you need to download them in JSON format and save them to the secrets folder (by default set to /secrets), and call them facebook_client_secrets.json and google_client_secrets respectively.
 
 #### Credit
 
