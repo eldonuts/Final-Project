@@ -18,15 +18,14 @@ This is a simple catalogue app created using Flask, and was created as part of t
 #### Setup
 
 1. Clone to your local machine: ```git clone https://github.com/eldonuts/Udacity-FSND-P3-Restaurants.git```
-2. Alter the **config.py** file to your specifications
-3. Create a **settings.cfg** file in your /restuarants directory and add a secret key like so (where xxxx is a randomly generated sequence of numbers): ```SECRET_KEY = 'xxxx'```
-4. Run: ```python setup.py```
-5. To start the app you just need to run: ```python run.py```
-6. That's it, you're good to go (without auth), if you want some test data please look below.
+2. Alter the **config.py** file to your specifications (you will want to change the secret key before deploying live)
+3. Run: ```python setup.py```
+4. To start the app you just need to run: ```python run.py```
+5. That's it, you're good to go (without auth), if you want some test data please look below.
 
 #### Test Data
 
-If you wish you generate some test data, I have added a script to grab the top 20 restuarants for NYC (from Zomato) and populate them with a bunch of random menu items. If you wish to try this out, just sign up for a Zomato API key [here](https://developers.zomato.com) and add this line to your **settings.cfg** file (where xxxx is your new key): ```ZOMATO_API_KEY = 'xxxx'```.
+If you wish you generate some test data, I have added a script to grab the top 20 restuarants for NYC (from Zomato) and populate them with a bunch of random menu items. If you wish to try this out, just sign up for a Zomato API key [here](https://developers.zomato.com) and add this line to a new file **settings.cfg** (in restaurants dir): ```ZOMATO_API_KEY = 'xxxx'``` (where xxxx is your new key).
 
 Once you're ready you can simply run: ```python test_db_populate.py```
 

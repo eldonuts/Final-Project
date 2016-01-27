@@ -18,6 +18,7 @@ class BaseConfig(object):
     UPLOAD_FOLDER = 'restaurants/static/restaurant_images'
     ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg', 'gif']
     CLIENT_SECRETS_DIR = 'secrets/'
+    SECRET_KEY = 'changeme'
 
 
 class DevConfig(BaseConfig):
@@ -56,8 +57,11 @@ def configure_app(app):
     # Config based on options in this file
     app.config.from_object(config[env])
 
-    # Config based on options in "APPLICATION_SETTINGS" file (used for anything sensitive)
-    app.config.from_pyfile(app.config.get('APPLICATION_SETTINGS'))
+    # Config based on options in "APPLICATION_SETTINGS" file if it exists (used for anything sensitive)
+    try:
+        app.config.from_pyfile(app.config.get('APPLICATION_SETTINGS'))
+    except IOError:
+        print 'could not find ' + app.config.get('APPLICATION_SETTINGS') + ', continuing without it'
 
     # Logging Config
     from logging.handlers import RotatingFileHandler
