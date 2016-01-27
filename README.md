@@ -26,7 +26,9 @@ This is a simple catalogue app created using Flask, and was created as part of t
 
 #### Test Data
 
-If you wish you generate some test data, I have added a script to grab the top 20 restuarants for NYC (from Zomato) and populate them with a bunch of random menu items. If you wish to try this out, just sign up for a Zomato API key [here](https://developers.zomato.com) and add this line to your **settings.cfg** file (where xxxx is your new key): ```ZOMATO_API_KEY = 'xxxx'```
+If you wish you generate some test data, I have added a script to grab the top 20 restuarants for NYC (from Zomato) and populate them with a bunch of random menu items. If you wish to try this out, just sign up for a Zomato API key [here](https://developers.zomato.com) and add this line to your **settings.cfg** file (where xxxx is your new key): ```ZOMATO_API_KEY = 'xxxx'```.
+
+Once you're ready you can simply run: ```python test_db_populate.py```
 
 #### Credit
 
