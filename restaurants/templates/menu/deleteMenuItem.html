@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block title %}Delete Menu Item{% endblock %}
+{% block content %}
+
+<center>
+    <h2>{{ menu_item.name }}</h2>
+    <p class="text-danger">Are you sure you want to delete?</p>
+    <form method="POST" action="{{ url_for('delete_menu_item',menu_id=menu_item.id, restaurant_id=restaurant_id) }}"><button class="btn btn-danger" type="submit">Yes</button></form>
+</center>
+
+{% endblock %}

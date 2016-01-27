@@ -1,0 +1,41 @@
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="Container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-links">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Restaurant Directory</a>
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="navbar-links">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('show_restaurants') }}">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="themes" aria-expanded="true">Restaurants <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            {% for restaurant in restaurant_list %}
+                            <li><a href="{{ url_for('show_menu', restaurant_id=restaurant.id) }}">{{ restaurant.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                </ul>
+                {% if logged_in %}
+                    <ul class="nav navbar-nav navbar-right login">
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    </ul>
+                    <p class="navbar-text navbar-right login-message">Logged in as {{ session['username'] }}</p>
+                {% else %}
+                    <ul class="nav navbar-nav navbar-right login">
+                        <li><a href="{{ url_for('login') }}">Login</a></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+
+

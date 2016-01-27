@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Directory - {% block title %}{% endblock %}</title>
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/mystyles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+    <script src="/static/login.js"></script>
+
+    {% endblock %}
+</head>
+<body>
+
+<!-- navbar -->
+{% include "navbar.html" %}
+<!-- /navbar -->
+
+<!-- content -->
+<div class="container">
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="row">
+                    {% for message in messages %}
+                        <div class="alert alert-dismissible{% if 'Deleted' in message %} alert-danger{% else %} alert-success{% endif %}">
+                            <button type="button" class="close" data-dismiss="alert"><small>x</small></button>
+                            {{ message|safe }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}
+        {% endblock %}
+</div>
+<!-- /content -->
+
+<!--
+<footer class="footer">
+    <div class="container">
+        <br>
+        <center><p class="text-muted">Restaurant Directory by Chris Mitchell</p></center>
+    </div>
+</footer>
+-->
+
+</body>
+</html>

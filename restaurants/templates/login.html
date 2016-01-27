@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+
+<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+<script src="/static/login.js"></script>
+
+
+<center>
+        <h1>Sign in with:</h1>
+        <span id="gSignInWrapper">
+            <span id="googleSigninButton">
+                <a href="#"><i class="fa fa-google-plus-square fa-5x google-red" id="googlelogo"></i></a>
+                <i class="fa fa-cog fa-spin fa-5x google-red" id="googleloading" style="display: none;"></i>
+            </span>
+        </span>
+        <a href="#" onclick="fb_login('{{ TOKEN }}')"><i class="fa fa-facebook-square fa-5x facebook-blue" id="facebooklogo"></i></a>
+        <i class="fa fa-cog fa-spin fa-5x facebook-blue" id="facebookloading" style="display: none;"></i>
+</center>
+
+
+
+<script>
+$('#googleSigninButton').click(function() {
+    // signInCallback defined in step 6.
+    auth2.grantOfflineAccess({'redirect_uri': 'postmessage'}).then(signInCallback);
+  });
+</script>
+
+<script>
+function signInCallback(authResult) {
+  if (authResult['code']) {
+
+    $('#googleloading').attr('style', 'display: inline');
+    $('#googlelogo').attr('style', 'display: none');
+
+    // Send the code to the server
+    $.ajax({
+      type: 'POST',
+      url: '{{ url_for('login_google') }}?token={{ TOKEN }}',
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        window.location.href = "{{ url_for('show_restaurants') }}";
+      },
+      processData: false,
+      data: authResult['code']
+    });
+  } else {
+    // There was an error.
+  }
+}
+</script>
+
+{% endblock %}
