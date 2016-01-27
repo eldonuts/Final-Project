@@ -1,3 +1,9 @@
-# Udacity-FSND-P3-Restaurants
-Completed for Udacity Full Stack Nanodegree Project 3
+# Udacity FSND Project 3 - Restaurants
 
+## Summary
+
+## Requirements
+
+## Setup
+
+## Credit
