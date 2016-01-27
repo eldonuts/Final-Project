@@ -5,8 +5,6 @@ from flask import flash
 from sqlalchemy import exc
 
 
-# Restaurant Functions
-
 def get_restaurants():
     return db.session.query(Restaurant).all()
 
@@ -40,8 +38,12 @@ def delete_restaurant(restaurant_id):
 
 
 def upload_restaurant_image(image, restaurant_id):
+    # Get extension from image param object
     image_ext = image.filename.rsplit('.', 1)[1]
+
     allowed_ext = app.config.get('ALLOWED_EXTENSIONS')
+
+    # Check if the file is in the allowed list specified in config
     if image_ext in allowed_ext:
         filename = secure_filename(str(restaurant_id) + '.jpg')
         image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -51,8 +53,6 @@ def upload_restaurant_image(image, restaurant_id):
     else:
         flash("Couldn't update image, must be in: " + str(allowed_ext))
 
-
-# Menu Functions
 
 def get_menu_items(restaurant_id):
     return db.session.query(MenuItem).filter(MenuItem.restaurant_id == restaurant_id).all()

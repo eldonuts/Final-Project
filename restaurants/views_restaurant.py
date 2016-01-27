@@ -1,4 +1,3 @@
-from restaurants import app
 from flask import render_template, request, redirect, url_for, flash
 from flask import session as login_session
 import crud_functions as crud

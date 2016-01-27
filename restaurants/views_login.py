@@ -1,22 +1,19 @@
 from restaurants import app
 from flask import render_template, request, flash, make_response, redirect, url_for
 from flask import session as login_session
+from oauth2client.client import flow_from_clientsecrets
+from oauth2client.client import FlowExchangeError
 import crud_functions as crud
-
 import random
 import string
 import json
 import httplib2
 import requests
 
-from oauth2client.client import flow_from_clientsecrets
-from oauth2client.client import FlowExchangeError
 
-
-facebook_client_secrets_file = app.config.get('CLIENT_SECRETS_DIR') + 'facebook_client_secrets.json'
-google_client_secrets_file = app.config.get('CLIENT_SECRETS_DIR') + 'google_client_secrets.json'
-
-CLIENT_ID = json.loads(open(google_client_secrets_file, 'r').read())['web']['client_id']
+FACEBOOK_CLIENT_SECRETS_FILE = app.config.get('CLIENT_SECRETS_DIR') + 'facebook_client_secrets.json'
+GOOGLE_CLIENT_SECRETS_FILE = app.config.get('CLIENT_SECRETS_DIR') + 'google_client_secrets.json'
+CLIENT_ID = json.loads(open(GOOGLE_CLIENT_SECRETS_FILE, 'r').read())['web']['client_id']
 
 
 if app.debug:
@@ -57,7 +54,7 @@ def login_google():
 
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets(google_client_secrets_file, scope='')
+        oauth_flow = flow_from_clientsecrets(GOOGLE_CLIENT_SECRETS_FILE, scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
@@ -129,26 +126,29 @@ def login_google():
 
 @app.route('/login_facebook', methods=['POST'])
 def login_facebook():
+    # Validate state token
     if request.args.get('state') != login_session['token']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
+
+    # Obtain Facebook access token
     access_token = request.data
 
-    app_id = json.loads(open(facebook_client_secrets_file, 'r').read())[
+    app_id = json.loads(open(FACEBOOK_CLIENT_SECRETS_FILE, 'r').read())[
         'web']['app_id']
     app_secret = json.loads(
-        open(facebook_client_secrets_file, 'r').read())['web']['app_secret']
+        open(FACEBOOK_CLIENT_SECRETS_FILE, 'r').read())['web']['app_secret']
     url = 'https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&' \
           'client_id=%s&client_secret=%s&fb_exchange_token=%s' % \
           (app_id, app_secret, access_token)
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
 
-    # Strip expire tag from access token
+    # Strip expire tag from auth token
     token = result.split("&")[0]
 
-    # Use token to get user info from API
+    # Use auth token to get user info from API
     url = 'https://graph.facebook.com/v2.4/me?%s&fields=name,id,email' % token
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
@@ -211,7 +211,7 @@ def logout():
             h = httplib2.Http()
             result = h.request(url, 'DELETE')[1]
             if 'success' in result:
-                # Reset the user's session.
+                # Clear the user's session.
                 login_session.clear()
                 flash('Logged out')
                 return redirect(url_for('show_restaurants'))

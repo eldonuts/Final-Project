@@ -1,4 +1,3 @@
-from restaurants import app
 from flask import render_template, request, redirect, url_for, flash
 from flask import session as login_session
 import crud_functions as crud
@@ -15,6 +14,7 @@ def show_menu(restaurant_id):
 
 @app.route('/restaurant/<int:restaurant_id>/menu/new', methods=['GET', 'POST'])
 def new_menu_item(restaurant_id):
+    # Make sure user is logged on first
     if 'username' not in login_session:
         return redirect(url_for('login'))
     form = MenuForm(request.form)
@@ -23,6 +23,7 @@ def new_menu_item(restaurant_id):
                            ('Beverage', 'Beverage'),
                            ('Dessert', 'Dessert')]
     if request.method == 'POST' and form.validate():
+        # Get data from form and then use CRUD function to update
         name = form.name.data
         description = form.description.data
         course = form.course.data
@@ -35,6 +36,7 @@ def new_menu_item(restaurant_id):
 
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/edit', methods=['GET', 'POST'])
 def edit_menu_item(restaurant_id, menu_id):
+    # Make sure user is logged on first
     if 'username' not in login_session:
         return redirect(url_for('login'))
     item = crud.get_menu_item(menu_id)
@@ -44,11 +46,13 @@ def edit_menu_item(restaurant_id, menu_id):
                            ('Beverage', 'Beverage'),
                            ('Dessert', 'Dessert')]
     if request.method == 'GET':
+        # Set values for form
         form.name.data = item.name
         form.course.data = item.course
         form.description.data = item.description
         form.price.data = item.price
     if request.method == 'POST' and form.validate():
+        # Get data from form and then use CRUD function to update
         name = form.name.data
         description = form.description.data
         course = form.course.data
@@ -61,6 +65,7 @@ def edit_menu_item(restaurant_id, menu_id):
 
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/delete', methods=['GET', 'POST'])
 def delete_menu_item(restaurant_id, menu_id):
+    # Make sure user is logged on first
     if 'username' not in login_session:
         return redirect(url_for('login'))
     if request.method == 'GET':

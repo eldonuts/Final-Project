@@ -16,6 +16,7 @@ class Restaurant(db.Model):
 
     @property
     def serialize(self):
+        """Serialize property used for API calls"""
         return {
             'name': self.name,
             'id': self.id,

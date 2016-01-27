@@ -1,4 +1,4 @@
-// FACEBOOK
+// FACEBOOK LOGIN API
 
 window.fbAsyncInit = function() {
 FB.init({
@@ -49,7 +49,7 @@ function fb_login(state){
             });
 
         } else {
-            //user hit cancel button
+            //User hit cancel button
             console.log('User cancelled login or did not fully authorize.');
 
         }
@@ -59,7 +59,7 @@ function fb_login(state){
 }
 
 
-// GOOGLE
+// GOOGLE LOGIN API
 
 function start() {
       gapi.load('auth2', function() {
