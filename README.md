@@ -6,8 +6,17 @@ This is a simple catalogue app created using Flask, and was created as part of t
 
 #### Requirements
 
+* [Flask](http://flask.pocoo.org/)
+* [Flask-SQLAlchemy](http://flask-sqlalchemy.pocoo.org/)
+* [Flask_WTF](https://flask-wtf.readthedocs.org)
+* [WTForms](https://wtforms.readthedocs.org)
+* [dicttoxml](https://pypi.python.org/pypi/dicttoxml)
+* [oauth2client](https://pypi.python.org/pypi/oauth2client)
+* [Werkzeug](http://werkzeug.pocoo.org/)
+* [Requests](http://docs.python-requests.org/)
+
 #### Setup
 
 #### Credit
 
-[United](https://bootswatch.com/united/) Bootstrap Theme
+* [United](https://bootswatch.com/united/) Bootstrap Theme
