@@ -42,3 +42,4 @@ Once you've gone through the instructions and gotten the keys, you need to downl
 #### Credit
 
 * [United](https://bootswatch.com/united/) Bootstrap Theme
+* Login views based on content from the FSND course, altered to fit requirements.
